@@ -3,3 +3,5 @@ node_modules
 *.tsbuildinfo
 
 !eslint.config.js
+coverage
+src/generated-types

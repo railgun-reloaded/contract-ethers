@@ -1,14 +1,19 @@
 {
   "name": "@railgun-reloaded/contract-ethers",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "build": "tsc --build",
-    "build:clean": "tsc --build --clean",
+    "build:tsc": "tsc --build",
+    "build:typechain": "typechain --target ethers-v6 --out-dir ./src/generated-types ./node_modules/@railgun-reloaded/contract-abis/abis/**/*.json",
+    "build": "npm run build:typechain && npm run build:tsc",
+    "clean:tsc": "tsc --build --clean",
+    "clean:typechain": "rimraf src/generated-types",
+    "clean": "npm run clean:typechain && npm run clean:tsc",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "prepack": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "npm run build",
+    "test": "NODE_OPTIONS=--enable-source-maps brittle --coverage test/**/*.js"
   },
   "author": "RAILGUN Project Contributors",
   "license": "MIT",
@@ -20,11 +25,20 @@
     "url": "https://github.com/railgun-reloaded/contract-ethers/issues"
   },
   "homepage": "https://github.com/railgun-reloaded/contract-ethers#readme",
-  "description": "",
+  "description": "Ethers Typed Contract for Interacting with Railgun",
   "devDependencies": {
     "@railgun-reloaded/eslint-config": "^1.1.0",
     "@railgun-reloaded/tsconfig": "^1.2.0",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@types/brittle": "^3.5.0",
+    "brittle": "^3.13.1",
     "eslint": "^9.24.0",
+    "rimraf": "^6.0.1",
+    "typechain": "^8.3.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@railgun-reloaded/contract-abis": "^1.0.0",
+    "ethers": "^6.13.5"
   }
 }
