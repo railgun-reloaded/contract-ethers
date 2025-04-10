@@ -1,0 +1,30 @@
+{
+  "name": "@railgun-reloaded/contract-ethers",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc --build",
+    "build:clean": "tsc --build --clean",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "prepack": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "RAILGUN Project Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/railgun-reloaded/contract-ethers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/railgun-reloaded/contract-ethers/issues"
+  },
+  "homepage": "https://github.com/railgun-reloaded/contract-ethers#readme",
+  "description": "",
+  "devDependencies": {
+    "@railgun-reloaded/eslint-config": "^1.1.0",
+    "@railgun-reloaded/tsconfig": "^1.2.0",
+    "eslint": "^9.24.0",
+    "typescript": "^5.8.3"
+  }
+}
