@@ -4,4 +4,3 @@ node_modules
 
 !eslint.config.js
 coverage
-src/generated-types

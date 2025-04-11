@@ -1,7 +1,7 @@
-import type { BaseContract, ContractRunner } from 'ethers'
+import type { Addressable, BaseContract, ContractRunner } from 'ethers'
 
 type TypedContractConstructor<TypedContractClass extends BaseContract> = typeof BaseContract & {
-  new (target: string, runner?: null | ContractRunner): TypedContractClass;
+  new (target: string | Addressable, runner?: null | ContractRunner): TypedContractClass;
 }
 
 export type { TypedContractConstructor }
