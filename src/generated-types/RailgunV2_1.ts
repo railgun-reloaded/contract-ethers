@@ -199,49 +199,7 @@ export type TransactionStructOutput = [
   unshieldPreimage: CommitmentPreimageStructOutput;
 };
 
-export type TokenDataLegacyStruct = {
-  tokenType: BigNumberish;
-  tokenAddress: AddressLike;
-  tokenSubID: BigNumberish;
-};
-
-export type TokenDataLegacyStructOutput = [
-  tokenType: bigint,
-  tokenAddress: string,
-  tokenSubID: bigint
-] & { tokenType: bigint; tokenAddress: string; tokenSubID: bigint };
-
-export type CommitmentPreimageLegacyStruct = {
-  npk: BigNumberish;
-  token: TokenDataLegacyStruct;
-  value: BigNumberish;
-};
-
-export type CommitmentPreimageLegacyStructOutput = [
-  npk: bigint,
-  token: TokenDataLegacyStructOutput,
-  value: bigint
-] & { npk: bigint; token: TokenDataLegacyStructOutput; value: bigint };
-
-export declare namespace RailgunLogic {
-  export type CommitmentCiphertextLegacyStruct = {
-    ciphertext: [BigNumberish, BigNumberish, BigNumberish, BigNumberish];
-    ephemeralKeys: [BigNumberish, BigNumberish];
-    memo: BigNumberish[];
-  };
-
-  export type CommitmentCiphertextLegacyStructOutput = [
-    ciphertext: [bigint, bigint, bigint, bigint],
-    ephemeralKeys: [bigint, bigint],
-    memo: bigint[]
-  ] & {
-    ciphertext: [bigint, bigint, bigint, bigint];
-    ephemeralKeys: [bigint, bigint];
-    memo: bigint[];
-  };
-}
-
-export interface RailgunSmartWalletV21Interface extends Interface {
+export interface RailgunV2_1Interface extends Interface {
   getFunction(
     nameOrSignature:
       | "ZERO_VALUE"
@@ -300,9 +258,6 @@ export interface RailgunSmartWalletV21Interface extends Interface {
       | "TreasuryChange"
       | "Unshield"
       | "VerifyingKeySet"
-      | "CommitmentBatch"
-      | "GeneratedCommitmentBatch"
-      | "Nullifiers"
   ): EventFragment;
 
   encodeFunctionData(
@@ -769,77 +724,11 @@ export namespace VerifyingKeySetEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
-export namespace CommitmentBatchEvent {
-  export type InputTuple = [
-    treeNumber: BigNumberish,
-    startPosition: BigNumberish,
-    hash: BigNumberish[],
-    ciphertext: RailgunLogic.CommitmentCiphertextLegacyStruct[]
-  ];
-  export type OutputTuple = [
-    treeNumber: bigint,
-    startPosition: bigint,
-    hash: bigint[],
-    ciphertext: RailgunLogic.CommitmentCiphertextLegacyStructOutput[]
-  ];
-  export interface OutputObject {
-    treeNumber: bigint;
-    startPosition: bigint;
-    hash: bigint[];
-    ciphertext: RailgunLogic.CommitmentCiphertextLegacyStructOutput[];
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace GeneratedCommitmentBatchEvent {
-  export type InputTuple = [
-    treeNumber: BigNumberish,
-    startPosition: BigNumberish,
-    commitments: CommitmentPreimageLegacyStruct[],
-    encryptedRandom: [BigNumberish, BigNumberish][]
-  ];
-  export type OutputTuple = [
-    treeNumber: bigint,
-    startPosition: bigint,
-    commitments: CommitmentPreimageLegacyStructOutput[],
-    encryptedRandom: [bigint, bigint][]
-  ];
-  export interface OutputObject {
-    treeNumber: bigint;
-    startPosition: bigint;
-    commitments: CommitmentPreimageLegacyStructOutput[];
-    encryptedRandom: [bigint, bigint][];
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace NullifiersEvent {
-  export type InputTuple = [
-    treeNumber: BigNumberish,
-    nullifier: BigNumberish[]
-  ];
-  export type OutputTuple = [treeNumber: bigint, nullifier: bigint[]];
-  export interface OutputObject {
-    treeNumber: bigint;
-    nullifier: bigint[];
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export interface RailgunSmartWalletV21 extends BaseContract {
-  connect(runner?: ContractRunner | null): RailgunSmartWalletV21;
+export interface RailgunV2_1 extends BaseContract {
+  connect(runner?: ContractRunner | null): RailgunV2_1;
   waitForDeployment(): Promise<this>;
 
-  interface: RailgunSmartWalletV21Interface;
+  interface: RailgunV2_1Interface;
 
   queryFilter<TCEvent extends TypedContractEvent>(
     event: TCEvent,
@@ -1009,7 +898,7 @@ export interface RailgunSmartWalletV21 extends BaseContract {
   shield: TypedContractMethod<
     [_shieldRequests: ShieldRequestStruct[]],
     [void],
-    "payable"
+    "nonpayable"
   >;
 
   shieldFee: TypedContractMethod<[], [bigint], "view">;
@@ -1043,7 +932,7 @@ export interface RailgunSmartWalletV21 extends BaseContract {
   transact: TypedContractMethod<
     [_transactions: TransactionStruct[]],
     [void],
-    "payable"
+    "nonpayable"
   >;
 
   transferOwnership: TypedContractMethod<
@@ -1226,7 +1115,7 @@ export interface RailgunSmartWalletV21 extends BaseContract {
   ): TypedContractMethod<
     [_shieldRequests: ShieldRequestStruct[]],
     [void],
-    "payable"
+    "nonpayable"
   >;
   getFunction(
     nameOrSignature: "shieldFee"
@@ -1262,7 +1151,7 @@ export interface RailgunSmartWalletV21 extends BaseContract {
   ): TypedContractMethod<
     [_transactions: TransactionStruct[]],
     [void],
-    "payable"
+    "nonpayable"
   >;
   getFunction(
     nameOrSignature: "transferOwnership"
@@ -1385,27 +1274,6 @@ export interface RailgunSmartWalletV21 extends BaseContract {
     VerifyingKeySetEvent.OutputTuple,
     VerifyingKeySetEvent.OutputObject
   >;
-  getEvent(
-    key: "CommitmentBatch"
-  ): TypedContractEvent<
-    CommitmentBatchEvent.InputTuple,
-    CommitmentBatchEvent.OutputTuple,
-    CommitmentBatchEvent.OutputObject
-  >;
-  getEvent(
-    key: "GeneratedCommitmentBatch"
-  ): TypedContractEvent<
-    GeneratedCommitmentBatchEvent.InputTuple,
-    GeneratedCommitmentBatchEvent.OutputTuple,
-    GeneratedCommitmentBatchEvent.OutputObject
-  >;
-  getEvent(
-    key: "Nullifiers"
-  ): TypedContractEvent<
-    NullifiersEvent.InputTuple,
-    NullifiersEvent.OutputTuple,
-    NullifiersEvent.OutputObject
-  >;
 
   filters: {
     "AddToBlocklist(address)": TypedContractEvent<
@@ -1527,39 +1395,6 @@ export interface RailgunSmartWalletV21 extends BaseContract {
       VerifyingKeySetEvent.InputTuple,
       VerifyingKeySetEvent.OutputTuple,
       VerifyingKeySetEvent.OutputObject
-    >;
-
-    "CommitmentBatch(uint256,uint256,uint256[],tuple[])": TypedContractEvent<
-      CommitmentBatchEvent.InputTuple,
-      CommitmentBatchEvent.OutputTuple,
-      CommitmentBatchEvent.OutputObject
-    >;
-    CommitmentBatch: TypedContractEvent<
-      CommitmentBatchEvent.InputTuple,
-      CommitmentBatchEvent.OutputTuple,
-      CommitmentBatchEvent.OutputObject
-    >;
-
-    "GeneratedCommitmentBatch(uint256,uint256,tuple[],uint256[2][])": TypedContractEvent<
-      GeneratedCommitmentBatchEvent.InputTuple,
-      GeneratedCommitmentBatchEvent.OutputTuple,
-      GeneratedCommitmentBatchEvent.OutputObject
-    >;
-    GeneratedCommitmentBatch: TypedContractEvent<
-      GeneratedCommitmentBatchEvent.InputTuple,
-      GeneratedCommitmentBatchEvent.OutputTuple,
-      GeneratedCommitmentBatchEvent.OutputObject
-    >;
-
-    "Nullifiers(uint256,uint256[])": TypedContractEvent<
-      NullifiersEvent.InputTuple,
-      NullifiersEvent.OutputTuple,
-      NullifiersEvent.OutputObject
-    >;
-    Nullifiers: TypedContractEvent<
-      NullifiersEvent.InputTuple,
-      NullifiersEvent.OutputTuple,
-      NullifiersEvent.OutputObject
     >;
   };
 }

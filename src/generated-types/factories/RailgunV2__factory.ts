@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  RailgunSmartWalletV21,
-  RailgunSmartWalletV21Interface,
-} from "../RailgunSmartWalletV21";
+import type { RailgunV2, RailgunV2Interface } from "../RailgunV2";
 
 const _abi = [
   {
@@ -183,12 +180,6 @@ const _abi = [
         internalType: "struct ShieldCiphertext[]",
         name: "shieldCiphertext",
         type: "tuple[]",
-      },
-      {
-        indexed: false,
-        internalType: "uint256[]",
-        name: "fees",
-        type: "uint256[]",
       },
     ],
     name: "Shield",
@@ -2437,153 +2428,14 @@ const _abi = [
     stateMutability: "view",
     type: "function",
   },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "treeNumber",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "startPosition",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256[]",
-        name: "hash",
-        type: "uint256[]",
-      },
-      {
-        components: [
-          {
-            internalType: "uint256[4]",
-            name: "ciphertext",
-            type: "uint256[4]",
-          },
-          {
-            internalType: "uint256[2]",
-            name: "ephemeralKeys",
-            type: "uint256[2]",
-          },
-          {
-            internalType: "uint256[]",
-            name: "memo",
-            type: "uint256[]",
-          },
-        ],
-        indexed: false,
-        internalType: "struct RailgunLogic.CommitmentCiphertextLegacy[]",
-        name: "ciphertext",
-        type: "tuple[]",
-      },
-    ],
-    name: "CommitmentBatch",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "treeNumber",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "startPosition",
-        type: "uint256",
-      },
-      {
-        components: [
-          {
-            internalType: "uint256",
-            name: "npk",
-            type: "uint256",
-          },
-          {
-            components: [
-              {
-                internalType: "enum TokenType",
-                name: "tokenType",
-                type: "uint8",
-              },
-              {
-                internalType: "address",
-                name: "tokenAddress",
-                type: "address",
-              },
-              {
-                internalType: "uint256",
-                name: "tokenSubID",
-                type: "uint256",
-              },
-            ],
-            internalType: "struct TokenDataLegacy",
-            name: "token",
-            type: "tuple",
-          },
-          {
-            internalType: "uint120",
-            name: "value",
-            type: "uint120",
-          },
-        ],
-        indexed: false,
-        internalType: "struct CommitmentPreimageLegacy[]",
-        name: "commitments",
-        type: "tuple[]",
-      },
-      {
-        indexed: false,
-        internalType: "uint256[2][]",
-        name: "encryptedRandom",
-        type: "uint256[2][]",
-      },
-    ],
-    name: "GeneratedCommitmentBatch",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "treeNumber",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256[]",
-        name: "nullifier",
-        type: "uint256[]",
-      },
-    ],
-    name: "Nullifiers",
-    type: "event",
-  },
 ] as const;
 
-export class RailgunSmartWalletV21__factory {
+export class RailgunV2__factory {
   static readonly abi = _abi;
-  static createInterface(): RailgunSmartWalletV21Interface {
-    return new Interface(_abi) as RailgunSmartWalletV21Interface;
+  static createInterface(): RailgunV2Interface {
+    return new Interface(_abi) as RailgunV2Interface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): RailgunSmartWalletV21 {
-    return new Contract(
-      address,
-      _abi,
-      runner
-    ) as unknown as RailgunSmartWalletV21;
+  static connect(address: string, runner?: ContractRunner | null): RailgunV2 {
+    return new Contract(address, _abi, runner) as unknown as RailgunV2;
   }
 }

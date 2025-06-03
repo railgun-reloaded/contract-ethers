@@ -1,23 +1,24 @@
-import RailgunSmartWalletV21ABI from '@railgun-reloaded/contract-abis/RailgunSmartWalletV21.json'
+/* eslint camelcase: ["error", {allow: ["RailgunV2_1Contract", "RailgunV2_1"]}] */
+import ABI from '@railgun-reloaded/contract-abis/RailgunV2_1.json'
 import type { Addressable, ContractRunner } from 'ethers'
 import { BaseContract } from 'ethers'
 
-import type { RailgunSmartWalletV21 } from '../generated-types/RailgunSmartWalletV21'
+import type { RailgunV2_1 } from '../generated-types/RailgunV2_1'
 
 import type { TypedContractConstructor } from './typed-contract-constructor'
 
 /**
  * Typed Contract for RailgunSmartWallet V2
  */
-class RailgunSmartWalletV21Base extends BaseContract {
+class RailgunV2_1Base extends BaseContract {
   /**
    * Create RailgunSmartWalletV21 ethers contract class
    * @param target - contract address
    * @param runner - ethers runner (provider, signer, etc.)
    */
   constructor (target: string | Addressable, runner?: null | ContractRunner) {
-    super(target, RailgunSmartWalletV21ABI, runner)
+    super(target, ABI, runner)
   }
 }
 
-export const RailgunSmartWalletV21Contract = RailgunSmartWalletV21Base as TypedContractConstructor<RailgunSmartWalletV21>
+export const RailgunV2_1Contract = RailgunV2_1Base as TypedContractConstructor<RailgunV2_1>

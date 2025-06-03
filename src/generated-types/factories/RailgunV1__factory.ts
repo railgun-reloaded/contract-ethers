@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  RailgunLogicV1,
-  RailgunLogicV1Interface,
-} from "../RailgunLogicV1";
+import type { RailgunV1, RailgunV1Interface } from "../RailgunV1";
 
 const _abi = [
   {
@@ -1748,15 +1745,12 @@ const _abi = [
   },
 ] as const;
 
-export class RailgunLogicV1__factory {
+export class RailgunV1__factory {
   static readonly abi = _abi;
-  static createInterface(): RailgunLogicV1Interface {
-    return new Interface(_abi) as RailgunLogicV1Interface;
+  static createInterface(): RailgunV1Interface {
+    return new Interface(_abi) as RailgunV1Interface;
   }
-  static connect(
-    address: string,
-    runner?: ContractRunner | null
-  ): RailgunLogicV1 {
-    return new Contract(address, _abi, runner) as unknown as RailgunLogicV1;
+  static connect(address: string, runner?: ContractRunner | null): RailgunV1 {
+    return new Contract(address, _abi, runner) as unknown as RailgunV1;
   }
 }
