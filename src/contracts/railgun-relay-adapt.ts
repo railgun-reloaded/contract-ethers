@@ -1,4 +1,4 @@
-import RailgunRelayAdaptABI from '@railgun-reloaded/contract-abis/RelayAdapt.json'
+import ABI from '@railgun-reloaded/contract-abis/RelayAdapt.json'
 import type { Addressable, ContractRunner } from 'ethers'
 import { BaseContract } from 'ethers'
 
@@ -16,7 +16,7 @@ class RailgunRelayAdaptBase extends BaseContract {
    * @param runner - ethers runner (provider, signer, etc.)
    */
   constructor (target: string | Addressable, runner?: null | ContractRunner) {
-    super(target, RailgunRelayAdaptABI, runner)
+    super(target, ABI, runner)
   }
 }
 

@@ -5,9 +5,9 @@
 ## Example Usage
 
 ```ts
-import { RailgunSmartWalletV2Contract } from '@railgun-reloaded/contracts'
+import { RailgunRelayAdaptContract } from '@railgun-reloaded/contracts'
 const address = '...'
-const contract = new RailgunSmartWalletV2Contract(address);
+const contract = new RailgunRelayAdaptContract(address);
 ```
 
 ## Install
