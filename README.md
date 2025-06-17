@@ -13,7 +13,7 @@ const contract = new RailgunRelayAdaptContract(address);
 ## Install
 
 ```sh
-npm install @railgun-reloaded/contract-etherss
+npm install @railgun-reloaded/contract-ethers
 ```
 
 ## License
